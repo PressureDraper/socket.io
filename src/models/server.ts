@@ -31,9 +31,7 @@ class Server {
     middlewares() {
         this.app.use(express.static(__dirname + '/../public'));
 
-        this.app.use(cors({
-            origin: 'https://socket-io-lilac.vercel.app'
-        }));
+        this.app.use(cors());
     }
 
     socketIOConfig() {
