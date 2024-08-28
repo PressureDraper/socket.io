@@ -20,12 +20,12 @@ class Server {
         this.server = require('http').createServer(this.app);
 
         //Socket server config
-        this.io = require('socket.io')(this.server, /* {
+        this.io = require('socket.io')(this.server, {
             cors: {
                 origin: 'https://socketio-production-02ed.up.railway.app/',
                 methods: ['GET', 'POST']
             }
-        } */);
+        });
     }
 
     middlewares() {
