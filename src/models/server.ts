@@ -31,11 +31,11 @@ class Server {
     middlewares() {
         this.app.use(express.static(__dirname + '../../../public'));
 
-        this.app.use(cors({
+        /* this.app.use(cors({
             origin: '*', // Permitir todas las fuentes. Ajusta según sea necesario.
             methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
             allowedHeaders: ['Content-Type', 'Authorization']
-        }));
+        })); */
     }
 
     socketIOConfig() {
