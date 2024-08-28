@@ -20,12 +20,7 @@ class Server {
         this.server = require('http').createServer(this.app);
 
         //Socket server config
-        this.io = require('socket.io')(this.server, {
-            cors: {
-                origin: 'https://socket-io-lilac.vercel.app/',
-                methods: ['GET', 'POST']
-            }
-        });
+        this.io = require('socket.io')(this.server, { });
     }
 
     middlewares() {
