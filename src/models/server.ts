@@ -1,10 +1,11 @@
 import express, { Express } from 'express';
 import { Server as HttpServer } from 'http';
 import { Socket } from 'socket.io';
+import Sockets from './sockets';
 
 class Server {
     app: Express;
-    port: number;
+    port: string;
     server: HttpServer;
     io: Socket;
 
@@ -12,7 +13,7 @@ class Server {
 
         //express server
         this.app = express();
-        this.port = 9191;
+        this.port = `${process.env.PORT}`;
 
         //http server
         this.server = require('http').createServer(this.app);
@@ -25,22 +26,14 @@ class Server {
         this.app.use(express.static(__dirname + '/../public'));
     }
 
-    socketIOClients() {
-        this.io.on('connection', (socket: Socket) => {
-            console.log(`Client connected: ${socket.id}`);
-            
-            socket.on('clientMsg', (data) => {
-                console.log(data);
-
-                this.io.emit('serverMsg', data); //io sends data to all sockets connected
-            });
-        });
+    socketIOConfig() {
+        new Sockets(this.io);
     }
 
     execute() {
 
         this.middlewares();
-        this.socketIOClients();
+        this.socketIOConfig();
 
         this.server.listen(this.port, () => {
             console.log('Server Running on port 9191...');
