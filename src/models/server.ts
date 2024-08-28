@@ -2,6 +2,7 @@ import express, { Express } from 'express';
 import { Server as HttpServer } from 'http';
 import { Socket } from 'socket.io';
 import Sockets from './sockets';
+import cors from 'cors';
 
 class Server {
     app: Express;
@@ -19,7 +20,11 @@ class Server {
         this.server = require('http').createServer(this.app);
 
         //Socket server config
-        this.io = require('socket.io')(this.server, { /* configs */ });
+        this.io = require('socket.io')(this.server, {
+            cors: {
+                origin: 'https://socket-io-lilac.vercel.app/'
+            }
+        });
     }
 
     middlewares() {
