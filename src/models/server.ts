@@ -20,13 +20,17 @@ class Server {
         this.server = require('http').createServer(this.app);
 
         //Socket server config
-        this.io = require('socket.io')(this.server, { });
+        this.io = require('socket.io')(this.server, {});
     }
 
     middlewares() {
         this.app.use(express.static(__dirname + '/../public'));
 
-        this.app.use(cors());
+        this.app.use(cors({
+            origin: '*', // Permitir todas las fuentes. Ajusta según sea necesario.
+            methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+            allowedHeaders: ['Content-Type', 'Authorization']
+        }));
     }
 
     socketIOConfig() {
