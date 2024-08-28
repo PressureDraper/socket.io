@@ -5,6 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const sockets_1 = __importDefault(require("./sockets"));
+const cors_1 = __importDefault(require("cors"));
 class Server {
     constructor() {
         //express server
@@ -13,10 +14,15 @@ class Server {
         //http server
         this.server = require('http').createServer(this.app);
         //Socket server config
-        this.io = require('socket.io')(this.server, { /* configs */});
+        this.io = require('socket.io')(this.server, {});
     }
     middlewares() {
         this.app.use(express_1.default.static(__dirname + '/../public'));
+        this.app.use((0, cors_1.default)({
+            origin: '*', // Permitir todas las fuentes. Ajusta según sea necesario.
+            methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+            allowedHeaders: ['Content-Type', 'Authorization']
+        }));
     }
     socketIOConfig() {
         new sockets_1.default(this.io);
