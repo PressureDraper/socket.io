@@ -48,7 +48,7 @@ class Server {
         this.socketIOConfig();
 
         this.server.listen(this.port, () => {
-            console.log('Server Running on port 9191...');
+            console.log(`Server Running on port ${this.port}...`);
         })
     }
 
