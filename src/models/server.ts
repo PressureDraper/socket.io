@@ -22,7 +22,8 @@ class Server {
         //Socket server config
         this.io = require('socket.io')(this.server, {
             cors: {
-                origin: 'https://socket-io-lilac.vercel.app/'
+                origin: 'https://socket-io-lilac.vercel.app/',
+                methods: ['GET', 'POST']
             }
         });
     }
