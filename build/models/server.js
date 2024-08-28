@@ -14,7 +14,12 @@ class Server {
         //http server
         this.server = require('http').createServer(this.app);
         //Socket server config
-        this.io = require('socket.io')(this.server, {});
+        this.io = require('socket.io')(this.server, {
+            cors: {
+                origin: 'https://socketio-production-02ed.up.railway.app/',
+                methods: ['GET', 'POST']
+            }
+        });
     }
     middlewares() {
         this.app.use(express_1.default.static(__dirname + '/../public'));
