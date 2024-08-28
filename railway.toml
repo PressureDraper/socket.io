@@ -1,6 +1,5 @@
 [build]
-builder = "NIXPACKS"
-command = "npm install && npm run build"
+builder = "npm install && npm run build"
 
 [deploy]
 runtime = "V2"
