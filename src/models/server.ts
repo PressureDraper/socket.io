@@ -20,20 +20,20 @@ class Server {
         this.server = require('http').createServer(this.app);
 
         //Socket server config
-        this.io = require('socket.io')(this.server, /* {
-            cors: {
+        this.io = require('socket.io')(this.server, {
+            /* cors: { //configurar cors solo si los clientes estan en diferentes dominios o puertos
                 origin: 'https://socketio-production-02ed.up.railway.app/',
                 methods: ['GET', 'POST']
-            }
-        } */);
+            } */
+        });
     }
 
     middlewares() {
         this.app.use(express.static(__dirname + '../../../public'));
 
-        /* this.app.use(cors({
-            origin: '*', // Permitir todas las fuentes. Ajusta según sea necesario.
-            methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+        /* this.app.use(cors({ //solo configurar cors si los clientes accederan de otros dominios ademas de 'origin'
+            origin: 'https://socketio-production-02ed.up.railway.app/', // Permitir todas las fuentes usar *. Ajusta según sea necesario.
+            methods: ['GET', 'POST'],
             allowedHeaders: ['Content-Type', 'Authorization']
         })); */
     }
