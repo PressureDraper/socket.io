@@ -21,21 +21,21 @@ class Server {
 
         //Socket server config
         this.io = require('socket.io')(this.server, {
-            /* cors: { //only enable cors if clients will connect from remote domains or ports besides 'origin'
-                origin: 'https://socketio-production-02ed.up.railway.app/',
+            cors: { //only enable cors if clients will connect from remote domains or ports besides 'origin'
+                origin: '*',
                 methods: ['GET', 'POST']
-            } */
+            }
         });
     }
 
     middlewares() {
         this.app.use(express.static(__dirname + '../../../public'));
 
-        /* this.app.use(cors({ //only enable cors if clients will connect from remote domains or ports besides 'origin'
-            origin: 'https://socketio-production-02ed.up.railway.app/', // Permitir todas las fuentes usar *. Ajusta según sea necesario.
+        this.app.use(cors({ //only enable cors if clients will connect from remote domains or ports besides 'origin'
+            origin: '*', // all domains allowed use *
             methods: ['GET', 'POST'],
             allowedHeaders: ['Content-Type', 'Authorization']
-        })); */
+        }));
     }
 
     socketIOConfig() {
