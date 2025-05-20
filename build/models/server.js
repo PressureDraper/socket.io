@@ -16,16 +16,16 @@ class Server {
         //Socket server config
         this.io = require('socket.io')(this.server, {
             cors: {
-                origin: 'https://socketio-production-02ed.up.railway.app/',
+                origin: '*',
                 methods: ['GET', 'POST']
             }
         });
     }
     middlewares() {
-        this.app.use(express_1.default.static(__dirname + '/../public'));
+        this.app.use(express_1.default.static(__dirname + '../../../public'));
         this.app.use((0, cors_1.default)({
-            origin: '*', // Permitir todas las fuentes. Ajusta según sea necesario.
-            methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+            origin: '*', // all domains allowed use *
+            methods: ['GET', 'POST'],
             allowedHeaders: ['Content-Type', 'Authorization']
         }));
     }
@@ -36,7 +36,7 @@ class Server {
         this.middlewares();
         this.socketIOConfig();
         this.server.listen(this.port, () => {
-            console.log('Server Running on port 9191...');
+            console.log(`Server Running on port ${this.port}...`);
         });
     }
 }
